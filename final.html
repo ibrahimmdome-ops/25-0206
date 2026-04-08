@@ -7,115 +7,119 @@
 <title>Explore Nature</title>
 <link rel="stylesheet" href="style.css">
 <style>
-/* Internal CSS */
-h1 {
-  text-align: center;
-  letter-spacing: 2px;
-}
-.hero {
-  text-align: center;
-  padding: 40px 20px;
-}
-.hero p {
-  max-width: 700px;
-  margin: auto;
-  line-height: 1.6;
-}
+h1 { text-align:center; }
 </style>
 </head>
 <body style="background: linear-gradient(to right, #0f2027, #203a43, #2c5364); color:white;">
 
-<header class="menu">
-  <h2 class="logo">🌿 Nature</h2>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="videos.html">Videos</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+<header class="navbar">
+  <div class="logo">🌿 Nature</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="videos.html">Videos</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 </header>
 
-<section class="hero">
-  <h1>Explore The Natural World</h1>
-  <p>Discover forests, oceans, wildlife and mountains through beautiful visuals and immersive videos. Nature connects us all.</p>
-</section>
+<h1>Explore The Natural World</h1>
+<p style="text-align:center; max-width:700px; margin:auto;">Discover forests, oceans, wildlife and mountains.</p>
 
-<section class="container">
+<div class="container">
   <div class="card"><img src="https://picsum.photos/300/200?1"><p>Forest</p></div>
   <div class="card"><img src="https://picsum.photos/300/200?2"><p>Ocean</p></div>
   <div class="card"><img src="https://picsum.photos/300/200?3"><p>Mountains</p></div>
   <div class="card"><img src="https://picsum.photos/300/200?4"><p>Wildlife</p></div>
   <div class="card"><img src="https://picsum.photos/300/200?5"><p>Sunset</p></div>
-</section>
+</div>
 
-<footer>
-<p>© 2026 Explore Nature | Designed by Student</p>
-</footer>
-
+<footer>© 2026 Explore Nature</footer>
 </body>
 </html>
 
 
 <!-- ================== style.css ================== -->
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+body { margin:0; font-family:Arial; }
+
+/* NAVBAR */
+.navbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  background:rgba(0,0,0,0.8);
+  position:sticky;
+  top:0;
 }
 
 .logo {
-  color: #00ffcc;
+  font-size:24px;
+  font-weight:bold;
+  color:#00ffcc;
 }
 
-.menu {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(0,0,0,0.7);
-  padding: 10px 20px;
-  position: sticky;
-  top: 0;
+.nav-links {
+  list-style:none;
+  display:flex;
 }
 
-.menu a {
-  color: white;
-  margin: 10px;
-  text-decoration: none;
-  transition: 0.3s;
+.nav-links li { margin:0 15px; }
+
+.nav-links a {
+  text-decoration:none;
+  color:white;
+  font-weight:bold;
+  position:relative;
 }
 
-.menu a:hover {
-  color: #00ffcc;
+.nav-links a::after {
+  content:'';
+  width:0;
+  height:2px;
+  background:#00ffcc;
+  position:absolute;
+  left:0;
+  bottom:-5px;
+  transition:0.3s;
 }
 
+.nav-links a:hover::after {
+  width:100%;
+}
+
+/* GRID */
 .container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:20px;
 }
 
 .card {
-  background: rgba(255,255,255,0.1);
-  border-radius: 15px;
-  overflow: hidden;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
+  background:rgba(255,255,255,0.1);
+  border-radius:15px;
+  overflow:hidden;
+  text-align:center;
+  transition:0.3s;
 }
 
 .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  transform:scale(1.05);
 }
 
-.card img {
-  width: 100%;
-}
+.card img { width:100%; }
 
 footer {
-  text-align: center;
-  padding: 15px;
-  background: black;
+  text-align:center;
+  padding:15px;
+  background:black;
+}
+
+iframe {
+  width:100%;
+  height:200px;
+  border:none;
 }
 
 
@@ -128,12 +132,18 @@ footer {
 </head>
 <body style="background: linear-gradient(to right, #134e5e, #71b280); color:white;">
 
-<header class="menu">
-  <h2 class="logo">🌿 Nature</h2>
+<header class="navbar">
+  <div class="logo">🌿 Nature</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="videos.html">Videos</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 </header>
 
-<h1 style="text-align:center;">Nature Gallery</h1>
-
+<h1>Gallery</h1>
 <div class="container">
   <div class="card"><img src="https://picsum.photos/300/200?6"></div>
   <div class="card"><img src="https://picsum.photos/300/200?7"></div>
@@ -141,7 +151,6 @@ footer {
   <div class="card"><img src="https://picsum.photos/300/200?9"></div>
   <div class="card"><img src="https://picsum.photos/300/200?10"></div>
 </div>
-
 </body>
 </html>
 
@@ -155,12 +164,18 @@ footer {
 </head>
 <body style="background: linear-gradient(to right, #232526, #414345); color:white;">
 
-<header class="menu">
-  <h2 class="logo">🌿 Nature</h2>
+<header class="navbar">
+  <div class="logo">🌿 Nature</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="videos.html">Videos</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 </header>
 
-<h1 style="text-align:center;">Nature Videos</h1>
-
+<h1>Nature Videos</h1>
 <div class="container">
   <iframe src="https://www.youtube.com/embed/6LTjJvOZ3bY"></iframe>
   <iframe src="https://www.youtube.com/embed/eKFTSSKCzWA"></iframe>
@@ -168,7 +183,6 @@ footer {
   <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
   <iframe src="https://www.youtube.com/embed/oUFJJNQGwhk"></iframe>
 </div>
-
 </body>
 </html>
 
@@ -182,20 +196,19 @@ footer {
 </head>
 <body style="background: linear-gradient(to right, #355c7d, #6c5b7b); color:white;">
 
-<header class="menu">
-  <h2 class="logo">🌿 Nature</h2>
+<header class="navbar">
+  <div class="logo">🌿 Nature</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="videos.html">Videos</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 </header>
 
-<h1 style="text-align:center;">About Nature</h1>
-
-<div style="padding:20px; text-align:center; max-width:800px; margin:auto;">
-<p>Nature includes plants, animals, landscapes, and all living ecosystems.</p>
-<p>Forests provide oxygen and shelter for wildlife.</p>
-<p>Oceans regulate the Earth's climate.</p>
-<p>Wildlife maintains ecological balance.</p>
-<p>Mountains influence weather and biodiversity.</p>
-</div>
-
+<h1>About Nature</h1>
+<p style="text-align:center; max-width:700px; margin:auto;">Nature includes plants, animals, and ecosystems. It supports life on Earth and provides beauty and balance.</p>
 </body>
 </html>
 
@@ -209,18 +222,23 @@ footer {
 </head>
 <body style="background: linear-gradient(to right, #42275a, #734b6d); color:white;">
 
-<header class="menu">
-  <h2 class="logo">🌿 Nature</h2>
+<header class="navbar">
+  <div class="logo">🌿 Nature</div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="videos.html">Videos</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
 </header>
 
-<h1 style="text-align:center;">Contact Us</h1>
-
-<form style="max-width:400px; margin:auto; padding:20px;">
-  <input type="text" placeholder="Name" required><br><br>
-  <input type="email" placeholder="Email" required><br><br>
-  <textarea placeholder="Message"></textarea><br><br>
-  <button type="submit">Send</button>
+<h1>Contact Us</h1>
+<form style="max-width:400px; margin:auto;">
+<input type="text" placeholder="Name"><br><br>
+<input type="email" placeholder="Email"><br><br>
+<textarea placeholder="Message"></textarea><br><br>
+<button>Send</button>
 </form>
-
 </body>
 </html>
