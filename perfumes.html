@@ -1,0 +1,607 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Best Perfumes 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e8d5a3;
+    --cream: #faf6f0;
+    --dark: #1a1208;
+    --mid: #3d2e14;
+    --text: #2c1f0a;
+    --muted: #8a7256;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    background: var(--dark);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem;
+    height: 68px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--gold);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--gold);
+    letter-spacing: 0.2em;
+    font-style: italic;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--gold-light);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ─── SEARCH ─── */
+  .search-wrap {
+    background: var(--mid);
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-inner {
+    display: flex;
+    width: 100%;
+    max-width: 640px;
+    border: 1px solid var(--gold);
+    overflow: hidden;
+  }
+
+  .search-inner input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 0.65rem 1.2rem;
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    outline: none;
+  }
+
+  .search-inner input::placeholder { color: var(--muted); }
+
+  .search-inner button {
+    background: var(--gold);
+    border: none;
+    padding: 0 1.4rem;
+    color: var(--dark);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .search-inner button:hover { background: var(--gold-light); }
+
+  /* ─── HERO ─── */
+  .hero {
+    text-align: center;
+    padding: 5rem 2rem 3rem;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '✦';
+    display: block;
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    animation: spin 8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--dark);
+    letter-spacing: -0.01em;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--gold); }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 2rem auto;
+  }
+
+  .divider span { flex: 1; height: 1px; background: var(--gold-light); }
+  .divider i { color: var(--gold); font-style: normal; font-size: 0.9rem; }
+
+  /* ─── PARAGRAPH ─── */
+  .intro {
+    max-width: 760px;
+    margin: 0 auto 4rem;
+    padding: 0 2rem;
+  }
+
+  .intro p {
+    line-height: 1.9;
+    color: var(--mid);
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+
+  /* ─── SECTION LABELS ─── */
+  .section-label {
+    text-align: center;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  /* ─── IMAGES ─── */
+  .images-section {
+    padding: 3rem 2rem;
+    background: var(--dark);
+  }
+
+  .images-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .img-card {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .img-card:nth-child(1) { background: linear-gradient(135deg, #2d1b4e, #8b5e83); }
+  .img-card:nth-child(2) { background: linear-gradient(135deg, #1a3a2a, #4a8c6f); }
+  .img-card:nth-child(3) { background: linear-gradient(135deg, #3d1a0a, #a0522d); }
+  .img-card:nth-child(4) { background: linear-gradient(135deg, #0a1a3d, #2a52a0); }
+  .img-card:nth-child(5) { background: linear-gradient(135deg, #3d3010, #a09030); }
+  .img-card:nth-child(6) { background: linear-gradient(135deg, #1a1a1a, #555); }
+
+  .img-card .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .img-card:hover .overlay { opacity: 1; }
+
+  .img-card .perfume-icon {
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .img-card .img-label {
+    color: var(--gold-light);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: 'Jost', sans-serif;
+  }
+
+  .img-section-label {
+    color: var(--gold-light);
+    text-align: center;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ─── VIDEOS ─── */
+  .videos-section {
+    padding: 4rem 2rem;
+    background: var(--cream);
+  }
+
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .video-wrap {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--gold-light);
+    overflow: hidden;
+  }
+
+  .video-wrap iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+    display: block;
+    border: none;
+  }
+
+  .video-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    padding: 0.6rem 0 0.7rem;
+    background: var(--cream);
+  }
+
+  /* ─── TABLES ─── */
+  .tables-section {
+    padding: 4rem 2rem;
+    background: #f2ece2;
+  }
+
+  .tables-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .table-card {
+    border: 1px solid var(--gold-light);
+    overflow: hidden;
+  }
+
+  .table-card h3 {
+    background: var(--dark);
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    padding: 0.9rem 1.2rem;
+    text-align: center;
+  }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  thead tr { background: var(--mid); }
+  thead th {
+    color: var(--gold-light);
+    padding: 0.6rem 1rem;
+    text-align: left;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+  }
+
+  tbody tr { border-bottom: 1px solid var(--gold-light); transition: background 0.2s; }
+  tbody tr:hover { background: rgba(201, 168, 76, 0.06); }
+  tbody td { padding: 0.7rem 1rem; color: var(--text); }
+  tbody td:last-child { color: var(--gold); font-weight: 400; }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials {
+    padding: 5rem 2rem;
+    background: var(--dark);
+    text-align: center;
+  }
+
+  #testimonials .section-label { color: var(--gold); }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 2.5rem auto 0;
+  }
+
+  .testi-card {
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    padding: 2rem 1.5rem;
+    position: relative;
+  }
+
+  .testi-card::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    color: var(--gold);
+    opacity: 0.2;
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    line-height: 1;
+  }
+
+  .testi-card p {
+    color: var(--gold-light);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .testi-card cite {
+    color: var(--muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--dark);
+    border-top: 1px solid rgba(201, 168, 76, 0.2);
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .images-grid { grid-template-columns: repeat(3, 1fr); }
+    .videos-grid { grid-template-columns: repeat(2, 1fr); }
+    .tables-wrap { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    nav { padding: 0 1rem; }
+    .nav-links { gap: 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Parfum</div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#contact">Contacts</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+  </ul>
+</nav>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <div class="search-inner">
+    <input type="text" placeholder="Search fragrances…">
+    <button>Search</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <h1>Best <em>Perfumes</em><br>of 2026</h1>
+  <div class="divider"><span></span><i>✦</i><span></span></div>
+</section>
+
+<!-- PARAGRAPH -->
+<div class="intro fade-up">
+  <p>
+    Discover the world's most exquisite fragrances — curated by master perfumers and celebrated
+    by connoisseurs across the globe. From rare oud accords to luminous florals, our 2026
+    collection captures the very essence of luxury and artistry.
+  </p>
+</div>
+
+<!-- IMAGES -->
+<section class="images-section fade-up">
+  <p class="img-section-label">Featured Fragrances</p>
+  <div class="images-grid">
+    <div class="img-card">
+      <div class="perfume-icon">🌹</div>
+      <div class="overlay"><span class="img-label">Rose Éternelle</span></div>
+    </div>
+    <div class="img-card">
+      <div class="perfume-icon">🌿</div>
+      <div class="overlay"><span class="img-label">Vert Sauvage</span></div>
+    </div>
+    <div class="img-card">
+      <div class="perfume-icon">🪵</div>
+      <div class="overlay"><span class="img-label">Oud Impérial</span></div>
+    </div>
+    <div class="img-card">
+      <div class="perfume-icon">🌊</div>
+      <div class="overlay"><span class="img-label">Bleu Mystère</span></div>
+    </div>
+    <div class="img-card">
+      <div class="perfume-icon">✨</div>
+      <div class="overlay"><span class="img-label">Or Lumière</span></div>
+    </div>
+    <div class="img-card">
+      <div class="perfume-icon">🖤</div>
+      <div class="overlay"><span class="img-label">Nuit Absolue</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEOS -->
+<section class="videos-section fade-up">
+  <p class="section-label">Behind the Scent</p>
+  <div class="videos-grid">
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/5ER7HoXkVe8" title="The Making Of" frameborder="0" allowfullscreen></iframe>
+      <span class="video-label">The Making Of</span>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/KMnPDMgqIuo" title="Top 10 Picks" frameborder="0" allowfullscreen></iframe>
+      <span class="video-label">Top 10 Picks</span>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/ZkP-TDLbhV4" title="Expert Reviews" frameborder="0" allowfullscreen></iframe>
+      <span class="video-label">Expert Reviews</span>
+    </div>
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/Iy3-H0no7qM" title="How to Layer" frameborder="0" allowfullscreen></iframe>
+      <span class="video-label">How to Layer</span>
+    </div>
+  </div>
+</section>
+
+<!-- TABLES -->
+<section class="tables-section fade-up">
+  <p class="section-label">Fragrance Guides</p>
+  <div class="tables-wrap">
+    <div class="table-card">
+      <h3>Top Perfumes 2026</h3>
+      <table>
+        <thead>
+          <tr><th>#</th><th>Name</th><th>House</th><th>Rating</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Rose Éternelle</td><td>Maison Clair</td><td>★ 9.8</td></tr>
+          <tr><td>2</td><td>Oud Impérial</td><td>Al Rashid</td><td>★ 9.6</td></tr>
+          <tr><td>3</td><td>Nuit Absolue</td><td>Noir & Co.</td><td>★ 9.5</td></tr>
+          <tr><td>4</td><td>Bleu Mystère</td><td>Aqua Labs</td><td>★ 9.3</td></tr>
+          <tr><td>5</td><td>Or Lumière</td><td>Dorée Paris</td><td>★ 9.1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-card">
+      <h3>Price & Availability</h3>
+      <table>
+        <thead>
+          <tr><th>Fragrance</th><th>Size</th><th>Price</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Rose Éternelle</td><td>100ml</td><td>$320</td></tr>
+          <tr><td>Oud Impérial</td><td>75ml</td><td>$485</td></tr>
+          <tr><td>Nuit Absolue</td><td>50ml</td><td>$210</td></tr>
+          <tr><td>Bleu Mystère</td><td>100ml</td><td>$175</td></tr>
+          <tr><td>Or Lumière</td><td>50ml</td><td>$260</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <p class="section-label">What Collectors Say</p>
+  <div class="testimonials-grid fade-up">
+    <div class="testi-card">
+      <p>Rose Éternelle is unlike anything I've worn before — it evolves beautifully throughout the day.</p>
+      <cite>— Isabelle M., Paris</cite>
+    </div>
+    <div class="testi-card">
+      <p>Oud Impérial has redefined what luxury means to me. Commanding, warm, and utterly addictive.</p>
+      <cite>— Reza K., Dubai</cite>
+    </div>
+    <div class="testi-card">
+      <p>Nuit Absolue is my signature scent for the season. Complex, mysterious, and impossibly elegant.</p>
+      <cite>— Sofia L., Milan</cite>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding:4rem 2rem; text-align:center; background: var(--cream);">
+  <p class="section-label">Contact Us</p>
+  <p style="color:var(--muted); font-family:'Cormorant Garamond',serif; font-size:1.15rem; margin-top:0.5rem;">
+    hello@bestperfumes2026.com &nbsp;·&nbsp; +1 (800) 555-0199
+  </p>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="padding:4rem 2rem; text-align:center; background:#f2ece2;">
+  <p class="section-label">About Us</p>
+  <p style="max-width:600px; margin:1rem auto 0; color:var(--mid); font-family:'Cormorant Garamond',serif; font-size:1.15rem; line-height:1.8;">
+    We are a dedicated team of fragrance enthusiasts and industry insiders, bringing you the most
+    authoritative guide to the world's finest perfumes — updated every year.
+  </p>
+</section>
+
+<footer>© 2026 Best Perfumes · All Rights Reserved</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 120);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
