@@ -1,76 +1,2235 @@
-<!DOCTYPE html>
+
+   
+     
+   
+   
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>External CSS — Headings & Paragraphs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NatureVerse — Explore Our World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green-dark: #1a3025;
+      --green-mid: #2d5a3d;
+      --green-light: #4a8c5c;
+      --gold: #c9a84c;
+      --cream: #f5f0e8;
+      --white: #ffffff;
+      --text-dark: #1a1a1a;
+      --text-mid: #4a4a4a;
+      --shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
 
-  <!-- ✅ EXTERNAL CSS LINKED HERE -->
-  <link rel="stylesheet" href="styles.css" />
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: rgba(26,48,37,0.97);
+      backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 64px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--gold); letter-spacing: 1px;
+    }
+
+    .nav-links { display: flex; gap: 0; list-style: none; }
+
+    .nav-links li a {
+      display: block; padding: 20px 20px;
+      color: var(--cream); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      transition: color 0.3s; position: relative;
+    }
+
+    .nav-links li a::after {
+      content: ''; position: absolute; bottom: 12px; left: 20px; right: 20px;
+      height: 2px; background: var(--gold);
+      transform: scaleX(0); transition: transform 0.3s;
+    }
+
+    .nav-links li a:hover { color: var(--gold); }
+    .nav-links li a:hover::after { transform: scaleX(1); }
+    .nav-links li a.active { color: var(--gold); }
+
+    .page { display: none; padding-top: 64px; min-height: 100vh; }
+    .page.active { display: block; animation: fadeIn 0.5s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      height: calc(100vh - 64px);
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 50%, var(--green-light) 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; position: relative; overflow: hidden;
+    }
+
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 30%, rgba(74,140,92,0.2) 0%, transparent 50%);
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      display: inline-block; color: var(--gold);
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 4px;
+      text-transform: uppercase; margin-bottom: 16px;
+      border: 1px solid rgba(201,168,76,0.4); padding: 6px 20px; border-radius: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.05; margin-bottom: 24px;
+    }
+
+    .hero h1 em { color: var(--gold); font-style: italic; }
+
+    .hero p {
+      font-size: 1.15rem; color: rgba(255,255,255,0.75);
+      max-width: 520px; margin: 0 auto 40px; line-height: 1.7;
+    }
+
+    .btn {
+      display: inline-block; padding: 14px 36px;
+      background: var(--gold); color: var(--green-dark);
+      font-weight: 700; font-size: 0.95rem;
+      border-radius: 4px; text-decoration: none;
+      letter-spacing: 0.5px; cursor: pointer; border: none;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+    }
+    .btn:hover { background: #e0be6a; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.5); }
+
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 2px solid rgba(255,255,255,0.5); margin-left: 12px;
+      box-shadow: none;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+
+    section { padding: 80px 40px; }
+
+    .section-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; color: var(--green-dark);
+      margin-bottom: 20px; line-height: 1.2;
+    }
+
+    .section-sub {
+      font-size: 1.05rem; color: var(--text-mid);
+      max-width: 560px; line-height: 1.7; margin-bottom: 48px;
+    }
+
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto;
+    }
+
+    .three-col {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 32px; max-width: 1200px; margin: 0 auto;
+    }
+
+    .card {
+      background: var(--white); border-radius: 12px;
+      overflow: hidden; box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.18); }
+
+    .card-img {
+      width: 100%; height: 200px; object-fit: cover;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+
+    .card-body { padding: 24px; }
+
+    .card-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--green-dark); margin-bottom: 10px;
+    }
+
+    .card-text { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; }
+
+    .img-placeholder {
+      width: 100%; aspect-ratio: 4/3;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 3.5rem; gap: 8px;
+      border-radius: 12px; box-shadow: var(--shadow);
+    }
+    .img-placeholder span { font-size: 0.85rem; font-weight: 600; color: var(--white); letter-spacing: 1px; }
+
+    /* VIDEO */
+    .video-container {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: var(--shadow);
+      aspect-ratio: 16/9; position: relative;
+      transition: transform 0.3s;
+      background: var(--green-dark);
+    }
+    .video-container:hover { transform: scale(1.02); }
+    .video-container video {
+      width: 100%; height: 100%; display: block; object-fit: cover;
+    }
+    .video-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      padding: 20px 16px 12px;
+      pointer-events: none;
+    }
+    .video-overlay span { color: var(--cream); font-weight: 600; font-size: 0.9rem; }
+
+    /* TABLES */
+    .table-wrap { overflow-x: auto; margin: 40px 0; box-shadow: var(--shadow); border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; background: var(--white); }
+    thead { background: var(--green-dark); }
+    thead th {
+      padding: 16px 20px; text-align: left;
+      color: var(--gold); font-size: 0.8rem;
+      font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    }
+    tbody tr { border-bottom: 1px solid rgba(0,0,0,0.06); transition: background 0.2s; }
+    tbody tr:hover { background: rgba(74,140,92,0.06); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td { padding: 15px 20px; font-size: 0.92rem; color: var(--text-mid); }
+    tbody td:first-child { font-weight: 600; color: var(--text-dark); }
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+    .badge-green { background: rgba(74,140,92,0.15); color: var(--green-mid); }
+    .badge-gold  { background: rgba(201,168,76,0.15); color: #8a6a1a; }
+    .badge-red   { background: rgba(220,80,80,0.12); color: #c04040; }
+
+    /* LISTS */
+    .styled-list { list-style: none; }
+    .styled-list > li {
+      padding: 14px 0 14px 28px; border-bottom: 1px solid rgba(0,0,0,0.07);
+      position: relative; font-weight: 500; color: var(--text-dark);
+    }
+    .styled-list > li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); }
+    .styled-list ul { margin-top: 10px; list-style: none; padding-left: 16px; }
+    .styled-list ul li { padding: 6px 0 6px 20px; position: relative; color: var(--text-mid); font-size: 0.92rem; }
+    .styled-list ul li::before { content: '–'; position: absolute; left: 0; color: var(--green-light); }
+
+    /* BACKGROUNDS */
+    .bg-dark { background: var(--green-dark); }
+    .bg-dark .section-title { color: var(--cream); }
+    .bg-dark .section-sub { color: rgba(245,240,232,0.7); }
+    .bg-pattern {
+      background-color: var(--cream);
+      background-image: radial-gradient(circle, rgba(74,140,92,0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .bg-gradient { background: linear-gradient(160deg, var(--green-dark) 0%, var(--green-mid) 100%); }
+
+    /* PARAGRAPHS */
+    .formatted-p {
+      font-size: 1.05rem; line-height: 1.85;
+      color: var(--text-mid); margin-bottom: 24px; text-align: justify;
+    }
+    .formatted-p::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; font-weight: 900;
+      float: left; line-height: 0.8;
+      margin: 6px 12px 0 0; color: var(--green-mid);
+    }
+    .pull-quote {
+      border-left: 4px solid var(--gold);
+      padding: 20px 28px; margin: 32px 0;
+      background: rgba(201,168,76,0.07); border-radius: 0 8px 8px 0;
+    }
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-style: italic;
+      color: var(--green-dark); line-height: 1.6;
+    }
+
+    /* GALLERY */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; max-width: 1100px; margin: 0 auto;
+    }
+    .gallery-grid .img-placeholder:first-child { grid-column: span 2; aspect-ratio: 2/1; }
+
+    /* FORM */
+    .contact-form { max-width: 600px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 0.85rem; font-weight: 600;
+      color: var(--green-dark); margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: 12px 16px;
+      border: 2px solid rgba(45,90,61,0.2); border-radius: 8px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      background: var(--white); transition: border-color 0.3s; outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--green-light);
+      box-shadow: 0 0 0 4px rgba(74,140,92,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    /* STATS */
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px; border-radius: 12px; overflow: hidden;
+      max-width: 1000px; margin: 0 auto;
+    }
+    .stat-item { padding: 36px 24px; text-align: center; background: rgba(255,255,255,0.04); }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.8rem; color: rgba(245,240,232,0.6); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 32px; max-width: 700px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--gold), var(--green-light));
+    }
+    .timeline-item { position: relative; margin-bottom: 40px; }
+    .timeline-dot {
+      position: absolute; left: -28px; top: 4px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--gold); border: 3px solid var(--cream);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .timeline-year { font-size: 0.75rem; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+    .timeline-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--green-dark); margin-bottom: 8px; }
+    .timeline-text { font-size: 0.92rem; color: var(--text-mid); line-height: 1.6; }
+
+    /* SEARCH BAR */
+    .search-bar {
+      display: flex; max-width: 500px;
+      margin: 0 auto 48px; overflow: hidden;
+      border-radius: 8px; box-shadow: var(--shadow);
+    }
+    .search-bar input {
+      flex: 1; padding: 14px 20px; border: none;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      background: var(--white); outline: none;
+    }
+    .search-bar button {
+      padding: 14px 24px; background: var(--green-mid);
+      color: var(--white); border: none; cursor: pointer;
+      font-weight: 600; transition: background 0.3s;
+    }
+    .search-bar button:hover { background: var(--green-dark); }
+
+    /* ACCORDION */
+    .accordion-item { border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .accordion-header {
+      width: 100%; padding: 18px 0; background: none; border: none;
+      text-align: left; cursor: pointer; display: flex;
+      justify-content: space-between; align-items: center;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; color: var(--green-dark);
+    }
+    .accordion-icon { color: var(--gold); font-size: 1.2rem; transition: transform 0.3s; }
+    .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .accordion-body p { padding: 0 0 18px; font-size: 0.95rem; color: var(--text-mid); line-height: 1.7; }
+    .accordion-item.open .accordion-icon { transform: rotate(45deg); }
+
+    /* BACK TO TOP */
+    #backToTop {
+      position: fixed; bottom: 32px; right: 32px;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--gold); border: none; cursor: pointer;
+      font-size: 1.2rem; box-shadow: 0 4px 20px rgba(201,168,76,0.5);
+      display: none; align-items: center; justify-content: center;
+      transition: transform 0.3s; z-index: 999;
+    }
+    #backToTop:hover { transform: translateY(-4px); }
+    #backToTop.visible { display: flex; }
+
+    /* FOOTER */
+    footer { background: var(--green-dark); padding: 60px 40px 30px; }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; max-width: 1200px; margin: 0 auto 48px;
+    }
+    .footer-brand .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--gold); margin-bottom: 16px; }
+    .footer-brand p { font-size: 0.9rem; color: rgba(245,240,232,0.6); line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { color: rgba(245,240,232,0.6); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px; display: flex;
+      justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { font-size: 0.85rem; color: rgba(245,240,232,0.4); }
+    .social-links { display: flex; gap: 12px; }
+    .social-links a {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cream); text-decoration: none; font-size: 0.85rem;
+      transition: background 0.3s;
+    }
+    .social-links a:hover { background: var(--gold); color: var(--green-dark); }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 100px; right: 32px;
+      background: var(--green-dark); color: var(--cream);
+      padding: 14px 20px; border-radius: 8px; font-size: 0.9rem;
+      box-shadow: var(--shadow); transform: translateY(20px); opacity: 0;
+      transition: all 0.4s; z-index: 2000; border-left: 4px solid var(--gold);
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* UTILITIES */
+    .max-w { max-width: 1200px; margin: 0 auto; }
+    .mb-0 { margin-bottom: 0 !important; }
+    .text-center { text-align: center; }
+    .mt-48 { margin-top: 48px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .two-col, .three-col { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid .img-placeholder:first-child { grid-column: span 1; aspect-ratio: 4/3; }
+      nav { padding: 0 20px; }
+      .nav-links li a { padding: 20px 12px; font-size: 0.8rem; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 60px 20px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
 </head>
 <body>
-<div class="page-wrapper">
 
-    <!-- H1 styled by ID: #page-title -->
-    <h1 id="page-title">The Art of Typography</h1>
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">🌿 NatureVerse</div>
+  <ul class="nav-links">
+    <li><a href="#" class="active" onclick="showPage('home', this)">Home</a></li>
+    <li><a href="#" onclick="showPage('about', this)">About</a></li>
+    <li><a href="#" onclick="showPage('gallery', this)">Gallery</a></li>
+    <li><a href="#" onclick="showPage('explore', this)">Explore</a></li>
+    <li><a href="#" onclick="showPage('contact', this)">Contact</a></li>
+  </ul>
+</nav>
 
-    <!-- H2 styled by ID: #section-title -->
-    <h2 id="section-title">Chapter One — Origins</h2>
+<!-- ═══ PAGE 1: HOME ═══ -->
+<div id="page-home" class="page active">
 
-    <!-- Paragraph 1: ID #intro-paragraph (drop-cap) -->
-    <p id="intro-paragraph">
-      Typography is the craft of arranging type to make written language legible,
-      readable, and visually appealing. Its roots stretch back to the invention of
-      moveable type by Johannes Gutenberg in the mid-fifteenth century, a moment that
-      forever changed how knowledge was recorded and shared across the world.
-    </p>
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">✦ Discover Our Planet</div>
+      <h1>Explore the<br><em>Natural World</em></h1>
+      <p>Journey through breathtaking ecosystems, rare wildlife encounters, and the wonders that make Earth an extraordinary home.</p>
+      <button class="btn" onclick="showPage('explore', document.querySelector('.nav-links li:nth-child(4) a'))">Start Exploring</button>
+      <button class="btn btn-outline" onclick="showPage('about', document.querySelector('.nav-links li:nth-child(2) a'))">Our Story</button>
+    </div>
+  </div>
 
-    <!-- H3 styled by class: .subsection-heading -->
-    <h3 class="subsection-heading">The Gutenberg Press</h3>
+  <!-- STATS -->
+  <section class="bg-dark">
+    <div class="max-w">
+      <div class="text-center" style="margin-bottom: 40px;">
+        <div class="section-label">By the numbers</div>
+        <h2 class="section-title" style="color: var(--cream);">Our Impact in Nature</h2>
+      </div>
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-num">8.7M</div><div class="stat-label">Species Documented</div></div>
+        <div class="stat-item"><div class="stat-num">195</div><div class="stat-label">Countries Explored</div></div>
+        <div class="stat-item"><div class="stat-num">12K</div><div class="stat-label">Protected Acres</div></div>
+        <div class="stat-item"><div class="stat-num">340+</div><div class="stat-label">Expert Researchers</div></div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Paragraph 2: class .body-paragraph -->
-    <p class="body-paragraph">
-      Before the printing press, manuscripts were copied by hand in scriptoria — rooms
-      within monasteries where monks laboured for years to reproduce a single volume.
-      The press mechanised this process, reducing the time and cost of book production
-      by orders of magnitude and spreading literacy throughout Europe.
-    </p>
+  <!-- TWO COLUMN FEATURED STORY -->
+  <section class="bg-pattern">
+    <div class="max-w two-col">
+      <div>
+        <div class="section-label">Featured Story</div>
+        <h2 class="section-title">The Vanishing Rainforests of Borneo</h2>
+        <p class="formatted-p">Deep within the ancient heart of Borneo's rainforest, a silent crisis unfolds. Every hour, forests equivalent to 300 football fields disappear — taking with them thousands of species found nowhere else on Earth.</p>
+        <p class="formatted-p mb-0">Scientists have recently discovered that these forests act as the planet's lungs and air conditioners simultaneously — absorbing carbon dioxide at an astonishing rate while regulating temperature for entire regions.</p>
+        <div class="pull-quote">
+          <p>"The forest is not just trees — it is a symphony of life that has played for millions of years. We must ensure it plays on."</p>
+        </div>
+        <button class="btn" onclick="showPage('explore', document.querySelector('.nav-links li:nth-child(4) a'))">Read More Stories</button>
+      </div>
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #1a5c2a, #2d8a4a); min-height: 420px;">
+        🌳<span>Borneo Rainforest</span>
+      </div>
+    </div>
+  </section>
 
-    <!-- Paragraph 3: class .highlight-paragraph (callout) -->
-    <p class="highlight-paragraph">
-      ✦ Key insight: Gutenberg's Bible, completed around 1455, is considered one of the
-      most beautiful examples of early typography. Its two-column layout and careful
-      spacing set a standard that modern designers still reference today.
-    </p>
+  <!-- THREE COLUMN CARDS -->
+  <section>
+    <div class="max-w">
+      <div class="section-label text-center">What We Cover</div>
+      <h2 class="section-title text-center">Explore by Theme</h2>
+      <p class="section-sub text-center" style="margin: 0 auto 48px;">From ocean depths to mountain peaks — every ecosystem has a story worth telling.</p>
+      <div class="three-col">
+        <div class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #1a3060, #2d5a9a);">🌊</div>
+          <div class="card-body">
+            <span class="card-tag">Marine Life</span>
+            <div class="card-title">Depths of the Pacific Ocean</div>
+            <p class="card-text">Discover the bioluminescent creatures that inhabit the darkest zones of our planet's largest ocean basin.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #2d5a1a, #4a8c2d);">🌿</div>
+          <div class="card-body">
+            <span class="card-tag">Forests</span>
+            <div class="card-title">Amazon: The Green Cathedral</div>
+            <p class="card-text">The Amazon River basin holds over 10% of all species on Earth — a treasure trove of biodiversity.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #5c3a1a, #8a5a2d);">🏔️</div>
+          <div class="card-body">
+            <span class="card-tag">Mountains</span>
+            <div class="card-title">Himalayan Ecosystems</div>
+            <p class="card-text">Life at altitude: the remarkable adaptations of snow leopards, red pandas, and alpine flora.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <hr class="section-divider" />
+  <!-- VIDEOS SECTION -->
+  <section class="bg-dark">
+    <div class="max-w">
+      <div class="section-label text-center">Watch &amp; Learn</div>
+      <h2 class="section-title text-center" style="color:var(--cream);">Featured Videos</h2>
+      <p class="section-sub text-center" style="color: rgba(245,240,232,0.65); margin: 0 auto 48px;">Five short films from our field researchers around the globe.</p>
 
-    <h2 class="section-heading">Chapter Two — The Digital Age</h2>
+      <div class="three-col">
+        <div class="video-container">
+          <video controls style="width:100%;height:100%;object-fit:cover;">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-overlay"><span>🐋 Humpback Migration</span></div>
+        </div>
+        <div class="video-container">
+          <video controls style="width:100%;height:100%;object-fit:cover;">
+            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-overlay"><span>🦁 Serengeti: Dry Season</span></div>
+        </div>
+        <div class="video-container">
+          <video controls style="width:100%;height:100%;object-fit:cover;">
+            <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-overlay"><span>🦅 Eagle Eye: Africa</span></div>
+        </div>
+      </div>
 
-    <!-- H3 reuses class .subsection-heading -->
-    <h3 class="subsection-heading">From Metal to Pixels</h3>
+      <div class="two-col mt-48" style="gap:32px;">
+        <div class="video-container">
+          <video controls style="width:100%;height:100%;object-fit:cover;">
+            <source src="https://samplelib.com/lib/preview/mp4/sample-10s.mp4" type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-overlay"><span>🌌 Northern Lights &amp; Arctic Life</span></div>
+        </div>
+        <div class="video-container">
+          <video controls style="width:100%;height:100%;object-fit:cover;">
+            <source src="https://samplelib.com/lib/preview/mp4/sample-15s.mp4" type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-overlay"><span>🐠 Great Barrier Reef Dive</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Paragraph 4: class .body-paragraph -->
-    <p class="body-paragraph">
-      The transition from physical type-setting to digital typography began in the
-      1980s with the rise of desktop publishing. Software like PageMaker and
-      the PostScript language gave designers unprecedented control over letterforms,
-      spacing, and layout — all on a personal computer screen.
-    </p>
+</div>
 
-    <!-- H4 styled by class: .minor-heading -->
-    <h4 class="minor-heading">Web Fonts &amp; Variable Type</h4>
+<!-- ═══ PAGE 2: ABOUT ═══ -->
+<div id="page-about" class="page">
 
-    <!-- Paragraph 5: class .body-paragraph -->
-    <p class="body-paragraph">
-      Today, variable fonts allow a single font file to contain an entire family of
-      weights, widths, and optical sizes, controlled with CSS properties. This reduces
-      page load times on the web while giving designers a continuous spectrum of
-      typographic expression that
+  <section style="background: var(--green-dark); padding: 80px 40px 60px;">
+    <div class="max-w two-col">
+      <div>
+        <div class="section-label">Our Story</div>
+        <h1 class="section-title" style="color: var(--cream); font-size: clamp(2rem,5vw,3.5rem);">Built by Nature Lovers, for Nature Lovers</h1>
+        <p class="formatted-p" style="color: rgba(245,240,232,0.75);">Founded in 2010 by a group of passionate ecologists and documentary filmmakers, NatureVerse began as a simple blog cataloguing field notes from the Kenyan savannah. What started as a personal project quickly grew into one of the world's most visited nature education platforms.</p>
+        <p class="formatted-p mb-0" style="color: rgba(245,240,232,0.75);">Our editorial team of 80 field researchers, scientists, photographers, and writers spans every continent. We believe that education is the most powerful conservation tool available.</p>
+      </div>
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #2d5a3d, #4a8c5c); min-height: 380px;">
+        🌍<span>Our Team in the Field</span>
+      </div>
+    </div>
+  </section>
 
-  <a href="https://ibrahimmdome-ops.github.io/25-0206/Assignment4.html" style="color:white; text-decoration: none; font-weight: bold;">Assignment4.html</a>
-  <header>
+  <!-- TIMELINE -->
+  <section class="bg-pattern">
+    <div class="max-w">
+      <div class="section-label">Milestones</div>
+      <h2 class="section-title">Our Journey</h2>
+      <p class="section-sub">From a blog to a global conservation media platform.</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2010</div>
+          <div class="timeline-title">NatureVerse Founded</div>
+          <p class="timeline-text">Dr. Amara Osei and filmmaker Priya Nair launch a blog from Nairobi with the first feature on Maasai Mara lion prides.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2013</div>
+          <div class="timeline-title">First Documentary Series</div>
+          <p class="timeline-text">Our 6-part series "Africa Unfiltered" premieres on three international streaming platforms and wins two environmental journalism awards.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2017</div>
+          <div class="timeline-title">10M Readers Milestone</div>
+          <p class="timeline-text">NatureVerse reaches 10 million monthly readers, establishing partnerships with UNESCO and WWF.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2021</div>
+          <div class="timeline-title">Conservation Fund Launched</div>
+          <p class="timeline-text">We establish the NatureVerse Conservation Fund, committing $2M annually to habitat protection across 15 countries.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2024</div>
+          <div class="timeline-title">AI-Powered Species ID Tool</div>
+          <p class="timeline-text">We launch SpeciesLens, a free mobile tool that identifies plants and animals from photos and links users to conservation data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- PHILOSOPHY PARAGRAPHS -->
+  <section>
+    <div class="max-w">
+      <div class="section-label">Our Philosophy</div>
+      <h2 class="section-title">Why Nature Matters</h2>
+      <p class="formatted-p">The relationship between humanity and the natural world is one of deep interdependence, shaped over millions of years of shared evolution. Every breath we take is made possible by the photosynthesis occurring in forests and ocean phytoplankton.</p>
+      <p class="formatted-p">Biodiversity is not merely a scientific curiosity. It is the foundation upon which all human civilization rests. The medicines that save lives, the fibers that clothe us, the clean water that sustains us: all originate from the diversity of species and ecosystems that cover our planet.</p>
+      <div class="pull-quote">
+        <p>"In every walk with nature, one receives far more than he seeks. The mountains are calling, and the rivers are whispering secrets older than civilization."</p>
+      </div>
+      <p class="formatted-p">Climate change, habitat destruction, overexploitation, pollution, and invasive species represent the five greatest threats to Earth's biodiversity today. But these threats are human-caused — and crucially, human-solvable.</p>
+    </div>
+  </section>
+
+  <!-- TEAM CARDS -->
+  <section class="bg-pattern">
+    <div class="max-w">
+      <div class="section-label text-center">The People Behind the Stories</div>
+      <h2 class="section-title text-center">Meet Our Team</h2>
+      <div class="three-col mt-48">
+        <div class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #2d5a3d, #4a8c5c);">👩‍🔬</div>
+          <div class="card-body">
+            <span class="card-tag">Co-Founder &amp; Editor</span>
+            <div class="card-title">Dr. Amara Osei</div>
+            <p class="card-text">PhD in Ecology from the University of Nairobi. 20 years in field research across East Africa's savannah ecosystems.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #1a3060, #2d5a9a);">🎥</div>
+          <div class="card-body">
+            <span class="card-tag">Co-Founder &amp; Director</span>
+            <div class="card-title">Priya Nair</div>
+            <p class="card-text">Award-winning documentary filmmaker. Her work has been featured on BBC, National Geographic, and Netflix Nature series.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #5c2a1a, #8a4a2d);">🌊</div>
+          <div class="card-body">
+            <span class="card-tag">Marine Correspondent</span>
+            <div class="card-title">James Kamau</div>
+            <p class="card-text">Marine biologist and underwater photographer. James has logged over 4,000 dive hours across five ocean basins.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ PAGE 3: GALLERY ═══ -->
+<div id="page-gallery" class="page">
+
+  <section>
+    <div class="max-w">
+      <div class="section-label text-center">Visual Stories</div>
+      <h2 class="section-title text-center">Photo Gallery</h2>
+      <p class="section-sub text-center" style="margin: 0 auto 16px;">Images captured by our field photographers across seven continents.</p>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search photos: forest, ocean, wildlife…" id="searchInput"/>
+        <button onclick="handleSearch()">Search</button>
+      </div>
+
+      <!-- 6 IMAGE CONTAINERS -->
+      <div class="gallery-grid">
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #1a5c2a, #2d8a4a);">🌳<span>Borneo Canopy</span></div>
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #1a3060, #3060a0); aspect-ratio:4/3;">🐋<span>Blue Whale, Pacific</span></div>
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #5c3a00, #9a6a10); aspect-ratio:4/3;">🦁<span>Maasai Mara Lions</span></div>
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #0a3040, #1a6070); aspect-ratio:4/3;">🐧<span>Emperor Penguins, Antarctica</span></div>
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #40100a, #7a2010); aspect-ratio:4/3;">🌋<span>Kilauea Volcano, Hawaii</span></div>
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #2a0a40, #6030a0); aspect-ratio:4/3;">🌌<span>Aurora Borealis, Iceland</span></div>
+      </div>
+
+      <!-- 2 MORE IMAGES -->
+      <div class="two-col mt-48" style="gap:24px;">
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #0a4030, #1a7050); aspect-ratio:16/9;">🌺<span>Amazon Orchids</span></div>
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #3a2a00, #7a5a00); aspect-ratio:16/9;">🦒<span>Giraffes at Sunset</span></div>
+      </div>
+
+      <!-- TABLE 1 -->
+      <h3 class="section-title" style="margin: 60px 0 8px; font-size: 1.6rem;">Photo Archive Details</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Photo Title</th><th>Location</th><th>Photographer</th><th>Date</th><th>Category</th><th>License</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Borneo Canopy at Dawn</td><td>Sarawak, Malaysia</td><td>Lin Wei</td><td>Mar 2024</td><td><span class="badge badge-green">Forest</span></td><td>CC BY 4.0</td></tr>
+            <tr><td>Blue Whale Migration</td><td>Pacific Ocean</td><td>James Kamau</td><td>Jan 2024</td><td><span class="badge badge-gold">Marine</span></td><td>Editorial</td></tr>
+            <tr><td>Maasai Mara Lions</td><td>Kenya</td><td>Amara Osei</td><td>Aug 2023</td><td><span class="badge badge-red">Wildlife</span></td><td>All Rights</td></tr>
+            <tr><td>Emperor Penguin Colony</td><td>Antarctica</td><td>Sofia Brandt</td><td>Nov 2023</td><td><span class="badge badge-gold">Polar</span></td><td>CC BY 4.0</td></tr>
+            <tr><td>Kilauea Eruption Flow</td><td>Hawaii, USA</td><td>Kai Nakamura</td><td>May 2023</td><td><span class="badge badge-red">Geology</span></td><td>CC BY-SA</td></tr>
+            <tr><td>Aurora Borealis, Reykjavik</td><td>Iceland</td><td>Björn Sigurðsson</td><td>Dec 2023</td><td><span class="badge badge-green">Atmosphere</span></td><td>Editorial</td></tr>
+            <tr><td>Amazon Orchid Varieties</td><td>Manaus, Brazil</td><td>Lucia Ferreira</td><td>Jul 2023</td><td><span class="badge badge-green">Flora</span></td><td>CC BY 4.0</td></tr>
+            <tr><td>Giraffes at Sunset</td><td>Amboseli, Kenya</td><td>Amara Osei</td><td>Sep 2023</td><td><span class="badge badge-red">Wildlife</span></td><td>All Rights</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ PAGE 4: EXPLORE ═══ -->
+<div id="page-explore" class="page">
+
+  <section style="background: var(--green-mid); padding: 60px 40px;">
+    <div class="max-w text-center">
+      <div class="section-label" style="color: var(--gold);">Discover</div>
+      <h1 class="section-title" style="color: var(--cream); font-size: clamp(2rem,5vw,3.5rem);">Explore Our World</h1>
+      <p class="section-sub" style="color: rgba(245,240,232,0.75); margin: 0 auto;">Dive into ecosystems, species data, and field reports from our researchers worldwide.</p>
+    </div>
+  </section>
+
+  <!-- TWO COL: NESTED LIST + CARDS -->
+  <section class="bg-pattern">
+    <div class="max-w two-col">
+      <div>
+        <div class="section-label">Ecosystem Guide</div>
+        <h2 class="section-title">Earth's Major Biomes</h2>
+        <p class="section-sub">Every biome is a unique community of life shaped by climate, geography, and millennia of evolution.</p>
+        <!-- NESTED LIST -->
+        <ul class="styled-list">
+          <li>Tropical Rainforests
+            <ul>
+              <li>Amazon Basin — South America</li>
+              <li>Congo Basin — Central Africa</li>
+              <li>Borneo &amp; Sumatra — Southeast Asia</li>
+              <li>Daintree — Queensland, Australia</li>
+            </ul>
+          </li>
+          <li>Temperate Forests
+            <ul>
+              <li>Pacific Northwest — USA &amp; Canada</li>
+              <li>Black Forest — Germany</li>
+              <li>Valdivian Forest — Chile</li>
+            </ul>
+          </li>
+          <li>Grasslands &amp; Savannahs
+            <ul>
+              <li>Maasai Mara — Kenya &amp; Tanzania</li>
+              <li>Serengeti — Tanzania</li>
+              <li>Pampas — Argentina</li>
+            </ul>
+          </li>
+          <li>Marine Ecosystems
+            <ul>
+              <li>Great Barrier Reef — Australia</li>
+              <li>Coral Triangle — Pacific</li>
+              <li>Kelp Forests — California</li>
+            </ul>
+          </li>
+          <li>Polar &amp; Alpine Zones
+            <ul>
+              <li>Antarctic Ice Sheet</li>
+              <li>Arctic Tundra — Canada &amp; Russia</li>
+              <li>Himalayan Alpine Meadows</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-label">Field Reports</div>
+        <h2 class="section-title">Latest from the Field</h2>
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-body">
+            <span class="card-tag">🌿 Forest</span>
+            <div class="card-title">New Orchid Species Found in Madagascar</div>
+            <p class="card-text">Researchers catalogued 14 previously undescribed orchid species in a remote highland valley.</p>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-body">
+            <span class="card-tag">🌊 Ocean</span>
+            <div class="card-title">Coral Bleaching Alert: Great Barrier Reef</div>
+            <p class="card-text">Aerial surveys confirm a fourth mass bleaching event since 2016, affecting 73% of the reef's 2,300 km length.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <span class="card-tag">🦁 Wildlife</span>
+            <div class="card-title">Cheetah Population Rebounds in Kenya</div>
+            <p class="card-text">A 15-year conservation program has increased cheetah numbers in the Laikipia Plateau from 54 to 189 individuals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABLE 2: SPECIES DATABASE -->
+  <section>
+    <div class="max-w">
+      <div class="section-label">Conservation Status</div>
+      <h2 class="section-title">At-Risk Species Database</h2>
+      <p class="section-sub">Flagship species currently monitored by our conservation partners.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Species</th><th>Scientific Name</th><th>Region</th><th>Wild Population</th><th>IUCN Status</th><th>Trend</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>🦁 African Lion</td><td>Panthera leo</td><td>Sub-Saharan Africa</td><td>~23,000</td><td><span class="badge badge-gold">Vulnerable</span></td><td>📉 Decreasing</td></tr>
+            <tr><td>🐘 African Elephant</td><td>Loxodonta africana</td><td>Africa</td><td>~415,000</td><td><span class="badge badge-gold">Vulnerable</span></td><td>📉 Decreasing</td></tr>
+            <tr><td>🦏 White Rhinoceros</td><td>Ceratotherium simum</td><td>Southern Africa</td><td>~18,000</td><td><span class="badge badge-green">Near Threatened</span></td><td>📈 Increasing</td></tr>
+            <tr><td>🐅 Amur Leopard</td><td>Panthera pardus orientalis</td><td>Russian Far East</td><td>~100</td><td><span class="badge badge-red">Critically Endangered</span></td><td>📈 Increasing</td></tr>
+            <tr><td>🦧 Bornean Orangutan</td><td>Pongo pygmaeus</td><td>Borneo</td><td>~104,700</td><td><span class="badge badge-red">Critically Endangered</span></td><td>📉 Decreasing</td></tr>
+            <tr><td>🐋 Blue Whale</td><td>Balaenoptera musculus</td><td>Global Oceans</td><td>10,000–25,000</td><td><span class="badge badge-gold">Endangered</span></td><td>📈 Increasing</td></tr>
+            <tr><td>🐧 Emperor Penguin</td><td>Aptenodytes forsteri</td><td>Antarctica</td><td>~600,000</td><td><span class="badge badge-gold">Vulnerable</span></td><td>📉 Decreasing</td></tr>
+            <tr><td>🐢 Leatherback Turtle</td><td>Dermochelys coriacea</td><td>Global</td><td>~34,000</td><td><span class="badge badge-gold">Vulnerable</span></td><td>📉 Decreasing</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCORDION FAQ -->
+  <section class="bg-pattern">
+    <div class="max-w two-col">
+      <div>
+        <div class="section-label">Common Questions</div>
+        <h2 class="section-title">Nature FAQ</h2>
+        <p class="section-sub">Answers to the most frequently asked questions from our global community.</p>
+        <p class="formatted-p">The natural world is full of mystery and complexity that continues to surprise even the most experienced scientists. Every year brings new discoveries that challenge our understanding of life on Earth.</p>
+      </div>
+      <div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            What is the most biodiverse place on Earth? <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>The tropical Andes — spanning Colombia, Ecuador, Peru, Bolivia, and Venezuela — hosting over 45,000 plant species per square kilometre.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            How many species go extinct each day? <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Scientists estimate 150–200 species go extinct every 24 hours — a rate 1,000 to 10,000 times higher than the natural background rate.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            What can individuals do to protect nature? <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Reduce meat consumption, support sustainable products, reduce single-use plastics, plant native species, and vote for environmentally conscious policies.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Why do forests matter for climate? <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Forests store roughly 45% of terrestrial carbon and absorb about 2.6 billion tonnes of CO₂ annually, regulating rainfall and cooling temperatures across continents.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ PAGE 5: CONTACT ═══ -->
+<div id="page-contact" class="page">
+
+  <section style="background: var(--green-dark); padding: 60px 40px;">
+    <div class="max-w text-center">
+      <div class="section-label">Get In Touch</div>
+      <h1 class="section-title" style="color: var(--cream); font-size: clamp(2rem,5vw,3.5rem);">We'd Love to Hear From You</h1>
+      <p class="section-sub" style="color: rgba(245,240,232,0.7); margin: 0 auto;">Whether you're a researcher, educator, journalist, or nature enthusiast — our door is always open.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="max-w two-col">
+      <div>
+        <div class="section-label">Send a Message</div>
+        <h2 class="section-title">Contact Form</h2>
+        <div class="contact-form">
+          <div class="form-group">
+            <label for="fname">Full Name</label>
+            <input type="text" id="fname" placeholder="Your full name"/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@example.com"/>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject">
+              <option value="">Select a topic…</option>
+              <option>Editorial Inquiry</option>
+              <option>Partnership &amp; Sponsorship</option>
+              <option>Conservation Project</option>
+              <option>Photo &amp; Video Licensing</option>
+              <option>General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="msg">Message</label>
+            <textarea id="msg" placeholder="Tell us what's on your mind…"></textarea>
+          </div>
+          <button class="btn" onclick="handleContactSubmit()">Send Message</button>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">Find Us</div>
+        <h2 class="section-title">Our Offices</h2>
+        <p class="formatted-p">NatureVerse operates from three regional offices strategically located to cover the world's most critical biodiversity hotspots. Each office houses researchers, editors, and multimedia producers.</p>
+        <p class="formatted-p">We welcome visits, collaborations, and partnerships with schools, universities, government bodies, and NGOs committed to environmental education.</p>
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 24px;">
+          <div class="card" style="border-left: 4px solid var(--gold); border-radius: 4px 12px 12px 4px;">
+            <div class="card-body">
+              <span class="card-tag">🌍 Africa HQ</span>
+              <div class="card-title">Nairobi, Kenya</div>
+              <p class="card-text">Westlands Business Park, Nairobi<br>+254 20 444 8800 · africa@natureverse.org</p>
+            </div>
+          </div>
+          <div class="card" style="border-left: 4px solid var(--green-light); border-radius: 4px 12px 12px 4px;">
+            <div class="card-body">
+              <span class="card-tag">🌏 Asia Pacific</span>
+              <div class="card-title">Singapore</div>
+              <p class="card-text">One Raffles Quay, Singapore 048583<br>+65 6800 9200 · asia@natureverse.org</p>
+            </div>
+          </div>
+          <div class="card" style="border-left: 4px solid var(--gold); border-radius: 4px 12px 12px 4px;">
+            <div class="card-body">
+              <span class="card-tag">🌎 Americas</span>
+              <div class="card-title">Bogotá, Colombia</div>
+              <p class="card-text">Carrera 7 No. 71-21, Bogotá<br>+57 1 800 7700 · americas@natureverse.org</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="bg-gradient text-center">
+    <div class="max-w" style="max-width: 700px;">
+      <div class="section-label" style="color: var(--gold);">Stay Connected</div>
+      <h2 class="section-title" style="color: var(--cream);">Join 2 Million Nature Lovers</h2>
+      <p style="color: rgba(245,240,232,0.7); margin-bottom: 36px; font-size: 1.05rem; line-height: 1.7;">Get weekly field reports, conservation alerts, and stunning photography delivered straight to your inbox. No spam — ever.</p>
+      <div class="search-bar" style="max-width: 440px; margin-bottom: 0;">
+        <input type="email" placeholder="Enter your email address" id="newsletterEmail"/>
+        <button onclick="handleNewsletter()">Subscribe</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">🌿 NatureVerse</div>
+      <p>Telling nature's stories with honesty, wonder, and urgency. Our mission is to connect humanity with the natural world through award-winning journalism and conservation science.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('home', null)">Home</a></li>
+        <li><a href="#" onclick="showPage('about', null)">About Us</a></li>
+        <li><a href="#" onclick="showPage('gallery', null)">Gallery</a></li>
+        <li><a href="#" onclick="showPage('explore', null)">Ecosystems</a></li>
+        <li><a href="#" onclick="showPage('contact', null)">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Topics</h4>
+      <ul>
+        <li><a href="#">Marine Life</a></li>
+        <li><a href="#">Forests</a></li>
+        <li><a href="#">Wildlife</a></li>
+        <li><a href="#">Climate</a></li>
+        <li><a href="#">Conservation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Field Reports</a></li>
+        <li><a href="#">Species Database</a></li>
+        <li><a href="#">Research Papers</a></li>
+        <li><a href="#">Photo Archive</a></li>
+        <li><a href="#">Press Kit</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 NatureVerse. All rights reserved. | Privacy Policy | Terms of Use</p>
+    <div class="social-links">
+      <a href="#">𝕏</a>
+      <a href="#">in</a>
+      <a href="#">▶</a>
+      <a href="#">📷</a>
+    </div>
+  </div>
+</footer>
+
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="toast" id="toast"></div>
+
+<script>
+  function showPage(pageId, clickedLink) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + pageId).classList.add('active');
+    if (clickedLink) clickedLink.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleAccordion(btn) {
+    const item = btn.parentElement;
+    const body = item.querySelector('.accordion-body');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.accordion-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.accordion-body').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  function handleContactSubmit() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    if (!name || !email) { showToast('⚠️ Please fill in your name and email.'); return; }
+    showToast('✅ Message sent! We\'ll reply within 48 hours.');
+    document.getElementById('fname').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('msg').value = '';
+  }
+
+  function handleNewsletter() {
+    const e = document.getElementById('newsletterEmail').value.trim();
+    if (!e || !e.includes('@')) { showToast('⚠️ Please enter a valid email address.'); return; }
+    showToast('🌿 Welcome aboard! Check your inbox for a confirmation email.');
+    document.getElementById('newsletterEmail').value = '';
+  }
+
+  function handleSearch() {
+    const q = document.getElementById('searchInput').value.trim();
+    if (q) showToast(`🔍 Searching for "${q}"…`);
+  }
+
+  window.addEventListener('scroll', () => {
+    const btn = document.getElementById('backToTop');
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NatureVerse — Explore Our World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green-dark: #1a3025;
+      --green-mid: #2d5a3d;
+      --green-light: #4a8c5c;
+      --gold: #c9a84c;
+      --cream: #f5f0e8;
+      --white: #ffffff;
+      --text-dark: #1a1a1a;
+      --text-mid: #4a4a4a;
+      --shadow: 0 8px 32px rgba(0,0,0,0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: rgba(26,48,37,0.97);
+      backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 64px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 900;
+      color: var(--gold); letter-spacing: 1px;
+    }
+
+    .nav-links { display: flex; gap: 0; list-style: none; }
+
+    .nav-links li a {
+      display: block; padding: 20px 20px;
+      color: var(--cream); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      transition: color 0.3s; position: relative;
+    }
+
+    .nav-links li a::after {
+      content: ''; position: absolute; bottom: 12px; left: 20px; right: 20px;
+      height: 2px; background: var(--gold);
+      transform: scaleX(0); transition: transform 0.3s;
+    }
+
+    .nav-links li a:hover { color: var(--gold); }
+    .nav-links li a:hover::after { transform: scaleX(1); }
+    .nav-links li a.active { color: var(--gold); }
+
+    .page { display: none; padding-top: 64px; min-height: 100vh; }
+    .page.active { display: block; animation: fadeIn 0.5s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero {
+      height: calc(100vh - 64px);
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-mid) 50%, var(--green-light) 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; position: relative; overflow: hidden;
+    }
+
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 30%, rgba(74,140,92,0.2) 0%, transparent 50%);
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      display: inline-block; color: var(--gold);
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 4px;
+      text-transform: uppercase; margin-bottom: 16px;
+      border: 1px solid rgba(201,168,76,0.4); padding: 6px 20px; border-radius: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 900; color: var(--white);
+      line-height: 1.05; margin-bottom: 24px;
+    }
+
+    .hero h1 em { color: var(--gold); font-style: italic; }
+
+    .hero p {
+      font-size: 1.15rem; color: rgba(255,255,255,0.75);
+      max-width: 520px; margin: 0 auto 40px; line-height: 1.7;
+    }
+
+    .btn {
+      display: inline-block; padding: 14px 36px;
+      background: var(--gold); color: var(--green-dark);
+      font-weight: 700; font-size: 0.95rem;
+      border-radius: 4px; text-decoration: none;
+      letter-spacing: 0.5px; cursor: pointer; border: none;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.4);
+    }
+    .btn:hover { background: #e0be6a; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.5); }
+
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 2px solid rgba(255,255,255,0.5); margin-left: 12px;
+      box-shadow: none;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--white); }
+
+    section { padding: 80px 40px; }
+
+    .section-label {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 4px;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700; color: var(--green-dark);
+      margin-bottom: 20px; line-height: 1.2;
+    }
+
+    .section-sub {
+      font-size: 1.05rem; color: var(--text-mid);
+      max-width: 560px; line-height: 1.7; margin-bottom: 48px;
+    }
+
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto;
+    }
+
+    .three-col {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 32px; max-width: 1200px; margin: 0 auto;
+    }
+
+    .card {
+      background: var(--white); border-radius: 12px;
+      overflow: hidden; box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.18); }
+
+    .card-img {
+      width: 100%; height: 200px; object-fit: cover;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+
+    .card-body { padding: 24px; }
+
+    .card-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--green-dark); margin-bottom: 10px;
+    }
+
+    .card-text { font-size: 0.9rem; color: var(--text-mid); line-height: 1.6; }
+
+    .img-placeholder {
+      width: 100%; aspect-ratio: 4/3;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 3.5rem; gap: 8px;
+      border-radius: 12px; box-shadow: var(--shadow);
+    }
+    .img-placeholder span { font-size: 0.85rem; font-weight: 600; color: var(--white); letter-spacing: 1px; }
+
+    /* VIDEO */
+    .video-container {
+      border-radius: 12px; overflow: hidden;
+      box-shadow: var(--shadow);
+      aspect-ratio: 16/9; position: relative;
+      transition: transform 0.3s;
+      background: var(--green-dark);
+    }
+    .video-container:hover { transform: scale(1.02); }
+    .video-container video {
+      width: 100%; height: 100%; display: block; object-fit: cover;
+    }
+    .video-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      padding: 20px 16px 12px;
+      pointer-events: none;
+    }
+    .video-overlay span { color: var(--cream); font-weight: 600; font-size: 0.9rem; }
+
+    /* TABLES */
+    .table-wrap { overflow-x: auto; margin: 40px 0; box-shadow: var(--shadow); border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; background: var(--white); }
+    thead { background: var(--green-dark); }
+    thead th {
+      padding: 16px 20px; text-align: left;
+      color: var(--gold); font-size: 0.8rem;
+      font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    }
+    tbody tr { border-bottom: 1px solid rgba(0,0,0,0.06); transition: background 0.2s; }
+    tbody tr:hover { background: rgba(74,140,92,0.06); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td { padding: 15px 20px; font-size: 0.92rem; color: var(--text-mid); }
+    tbody td:first-child { font-weight: 600; color: var(--text-dark); }
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+    .badge-green { background: rgba(74,140,92,0.15); color: var(--green-mid); }
+    .badge-gold  { background: rgba(201,168,76,0.15); color: #8a6a1a; }
+    .badge-red   { background: rgba(220,80,80,0.12); color: #c04040; }
+
+    /* LISTS */
+    .styled-list { list-style: none; }
+    .styled-list > li {
+      padding: 14px 0 14px 28px; border-bottom: 1px solid rgba(0,0,0,0.07);
+      position: relative; font-weight: 500; color: var(--text-dark);
+    }
+    .styled-list > li::before { content: '▸'; position: absolute; left: 0; color: var(--gold); }
+    .styled-list ul { margin-top: 10px; list-style: none; padding-left: 16px; }
+    .styled-list ul li { padding: 6px 0 6px 20px; position: relative; color: var(--text-mid); font-size: 0.92rem; }
+    .styled-list ul li::before { content: '–'; position: absolute; left: 0; color: var(--green-light); }
+
+    /* BACKGROUNDS */
+    .bg-dark { background: var(--green-dark); }
+    .bg-dark .section-title { color: var(--cream); }
+    .bg-dark .section-sub { color: rgba(245,240,232,0.7); }
+    .bg-pattern {
+      background-color: var(--cream);
+      background-image: radial-gradient(circle, rgba(74,140,92,0.08) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .bg-gradient { background: linear-gradient(160deg, var(--green-dark) 0%, var(--green-mid) 100%); }
+
+    /* PARAGRAPHS */
+    .formatted-p {
+      font-size: 1.05rem; line-height: 1.85;
+      color: var(--text-mid); margin-bottom: 24px; text-align: justify;
+    }
+    .formatted-p::first-letter {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; font-weight: 900;
+      float: left; line-height: 0.8;
+      margin: 6px 12px 0 0; color: var(--green-mid);
+    }
+    .pull-quote {
+      border-left: 4px solid var(--gold);
+      padding: 20px 28px; margin: 32px 0;
+      background: rgba(201,168,76,0.07); border-radius: 0 8px 8px 0;
+    }
+    .pull-quote p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-style: italic;
+      color: var(--green-dark); line-height: 1.6;
+    }
+
+    /* GALLERY */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; max-width: 1100px; margin: 0 auto;
+    }
+    .gallery-grid .img-placeholder:first-child { grid-column: span 2; aspect-ratio: 2/1; }
+
+    /* FORM */
+    .contact-form { max-width: 600px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 0.85rem; font-weight: 600;
+      color: var(--green-dark); margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; padding: 12px 16px;
+      border: 2px solid rgba(45,90,61,0.2); border-radius: 8px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      background: var(--white); transition: border-color 0.3s; outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--green-light);
+      box-shadow: 0 0 0 4px rgba(74,140,92,0.1);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    /* STATS */
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 2px; border-radius: 12px; overflow: hidden;
+      max-width: 1000px; margin: 0 auto;
+    }
+    .stat-item { padding: 36px 24px; text-align: center; background: rgba(255,255,255,0.04); }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.8rem; color: rgba(245,240,232,0.6); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+
+    /* TIMELINE */
+    .timeline { position: relative; padding-left: 32px; max-width: 700px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--gold), var(--green-light));
+    }
+    .timeline-item { position: relative; margin-bottom: 40px; }
+    .timeline-dot {
+      position: absolute; left: -28px; top: 4px;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--gold); border: 3px solid var(--cream);
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .timeline-year { font-size: 0.75rem; font-weight: 700; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
+    .timeline-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--green-dark); margin-bottom: 8px; }
+    .timeline-text { font-size: 0.92rem; color: var(--text-mid); line-height: 1.6; }
+
+    /* SEARCH BAR */
+    .search-bar {
+      display: flex; max-width: 500px;
+      margin: 0 auto 48px; overflow: hidden;
+      border-radius: 8px; box-shadow: var(--shadow);
+    }
+    .search-bar input {
+      flex: 1; padding: 14px 20px; border: none;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+      background: var(--white); outline: none;
+    }
+    .search-bar button {
+      padding: 14px 24px; background: var(--green-mid);
+      color: var(--white); border: none; cursor: pointer;
+      font-weight: 600; transition: background 0.3s;
+    }
+    .search-bar button:hover { background: var(--green-dark); }
+
+    /* ACCORDION */
+    .accordion-item { border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .accordion-header {
+      width: 100%; padding: 18px 0; background: none; border: none;
+      text-align: left; cursor: pointer; display: flex;
+      justify-content: space-between; align-items: center;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; color: var(--green-dark);
+    }
+    .accordion-icon { color: var(--gold); font-size: 1.2rem; transition: transform 0.3s; }
+    .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+    .accordion-body p { padding: 0 0 18px; font-size: 0.95rem; color: var(--text-mid); line-height: 1.7; }
+    .accordion-item.open .accordion-icon { transform: rotate(45deg); }
+
+    /* BACK TO TOP */
+    #backToTop {
+      position: fixed; bottom: 32px; right: 32px;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--gold); border: none; cursor: pointer;
+      font-size: 1.2rem; box-shadow: 0 4px 20px rgba(201,168,76,0.5);
+      display: none; align-items: center; justify-content: center;
+      transition: transform 0.3s; z-index: 999;
+    }
+    #backToTop:hover { transform: translateY(-4px); }
+    #backToTop.visible { display: flex; }
+
+    /* FOOTER */
+    footer { background: var(--green-dark); padding: 60px 40px 30px; }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; max-width: 1200px; margin: 0 auto 48px;
+    }
+    .footer-brand .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 900; color: var(--gold); margin-bottom: 16px; }
+    .footer-brand p { font-size: 0.9rem; color: rgba(245,240,232,0.6); line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a { color: rgba(245,240,232,0.6); text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .footer-col ul li a:hover { color: var(--cream); }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px; display: flex;
+      justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { font-size: 0.85rem; color: rgba(245,240,232,0.4); }
+    .social-links { display: flex; gap: 12px; }
+    .social-links a {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cream); text-decoration: none; font-size: 0.85rem;
+      transition: background 0.3s;
+    }
+    .social-links a:hover { background: var(--gold); color: var(--green-dark); }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 100px; right: 32px;
+      background: var(--green-dark); color: var(--cream);
+      padding: 14px 20px; border-radius: 8px; font-size: 0.9rem;
+      box-shadow: var(--shadow); transform: translateY(20px); opacity: 0;
+      transition: all 0.4s; z-index: 2000; border-left: 4px solid var(--gold);
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* UTILITIES */
+    .max-w { max-width: 1200px; margin: 0 auto; }
+    .mb-0 { margin-bottom: 0 !important; }
+    .text-center { text-align: center; }
+    .mt-48 { margin-top: 48px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .two-col, .three-col { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid .img-placeholder:first-child { grid-column: span 1; aspect-ratio: 4/3; }
+      nav { padding: 0 20px; }
+      .nav-links li a { padding: 20px 12px; font-size: 0.8rem; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 60px 20px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">🌿 NatureVerse</div>
+  <ul class="nav-links">
+    <li><a href="#" class="active" onclick="showPage('home', this)">Home</a></li>
+    <li><a href="#" onclick="showPage('about', this)">About</a></li>
+    <li><a href="#" onclick="showPage('gallery', this)">Gallery</a></li>
+    <li><a href="#" onclick="showPage('explore', this)">Explore</a></li>
+    <li><a href="#" onclick="showPage('contact', this)">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ PAGE 1: HOME ═══ -->
+<div id="page-home" class="page active">
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="hero-eyebrow">✦ Discover Our Planet</div>
+      <h1>Explore the<br><em>Natural World</em></h1>
+      <p>Journey through breathtaking ecosystems, rare wildlife encounters, and the wonders that make Earth an extraordinary home.</p>
+      <button class="btn" onclick="showPage('explore', document.querySelector('.nav-links li:nth-child(4) a'))">Start Exploring</button>
+      <button class="btn btn-outline" onclick="showPage('about', document.querySelector('.nav-links li:nth-child(2) a'))">Our Story</button>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <section class="bg-dark">
+    <div class="max-w">
+      <div class="text-center" style="margin-bottom: 40px;">
+        <div class="section-label">By the numbers</div>
+        <h2 class="section-title" style="color: var(--cream);">Our Impact in Nature</h2>
+      </div>
+      <div class="stats-row">
+        <div class="stat-item"><div class="stat-num">8.7M</div><div class="stat-label">Species Documented</div></div>
+        <div class="stat-item"><div class="stat-num">195</div><div class="stat-label">Countries Explored</div></div>
+        <div class="stat-item"><div class="stat-num">12K</div><div class="stat-label">Protected Acres</div></div>
+        <div class="stat-item"><div class="stat-num">340+</div><div class="stat-label">Expert Researchers</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO COLUMN FEATURED STORY -->
+  <section class="bg-pattern">
+    <div class="max-w two-col">
+      <div>
+        <div class="section-label">Featured Story</div>
+        <h2 class="section-title">The Vanishing Rainforests of Borneo</h2>
+        <p class="formatted-p">Deep within the ancient heart of Borneo's rainforest, a silent crisis unfolds. Every hour, forests equivalent to 300 football fields disappear — taking with them thousands of species found nowhere else on Earth.</p>
+        <p class="formatted-p mb-0">Scientists have recently discovered that these forests act as the planet's lungs and air conditioners simultaneously — absorbing carbon dioxide at an astonishing rate while regulating temperature for entire regions.</p>
+        <div class="pull-quote">
+          <p>"The forest is not just trees — it is a symphony of life that has played for millions of years. We must ensure it plays on."</p>
+        </div>
+        <button class="btn" onclick="showPage('explore', document.querySelector('.nav-links li:nth-child(4) a'))">Read More Stories</button>
+      </div>
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #1a5c2a, #2d8a4a); min-height: 420px;">
+        🌳<span>Borneo Rainforest</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE COLUMN CARDS -->
+  <section>
+    <div class="max-w">
+      <div class="section-label text-center">What We Cover</div>
+      <h2 class="section-title text-center">Explore by Theme</h2>
+      <p class="section-sub text-center" style="margin: 0 auto 48px;">From ocean depths to mountain peaks — every ecosystem has a story worth telling.</p>
+      <div class="three-col">
+        <div class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #1a3060, #2d5a9a);">🌊</div>
+          <div class="card-body">
+            <span class="card-tag">Marine Life</span>
+            <div class="card-title">Depths of the Pacific Ocean</div>
+            <p class="card-text">Discover the bioluminescent creatures that inhabit the darkest zones of our planet's largest ocean basin.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #2d5a1a, #4a8c2d);">🌿</div>
+          <div class="card-body">
+            <span class="card-tag">Forests</span>
+            <div class="card-title">Amazon: The Green Cathedral</div>
+            <p class="card-text">The Amazon River basin holds over 10% of all species on Earth — a treasure trove of biodiversity.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #5c3a1a, #8a5a2d);">🏔️</div>
+          <div class="card-body">
+            <span class="card-tag">Mountains</span>
+            <div class="card-title">Himalayan Ecosystems</div>
+            <p class="card-text">Life at altitude: the remarkable adaptations of snow leopards, red pandas, and alpine flora.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS SECTION -->
+  <section class="bg-dark">
+    <div class="max-w">
+      <div class="section-label text-center">Watch &amp; Learn</div>
+      <h2 class="section-title text-center" style="color:var(--cream);">Featured Videos</h2>
+      <p class="section-sub text-center" style="color: rgba(245,240,232,0.65); margin: 0 auto 48px;">Five short films from our field researchers around the globe.</p>
+
+      <div class="three-col">
+        <div class="video-container">
+          <video controls style="width:100%;height:100%;object-fit:cover;">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-overlay"><span>🐋 Humpback Migration</span></div>
+        </div>
+        <div class="video-container">
+          <video controls style="width:100%;height:100%;object-fit:cover;">
+            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-overlay"><span>🦁 Serengeti: Dry Season</span></div>
+        </div>
+        <div class="video-container">
+          <video controls style="width:100%;height:100%;object-fit:cover;">
+            <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-overlay"><span>🦅 Eagle Eye: Africa</span></div>
+        </div>
+      </div>
+
+      <div class="two-col mt-48" style="gap:32px;">
+        <div class="video-container">
+          <video controls style="width:100%;height:100%;object-fit:cover;">
+            <source src="https://samplelib.com/lib/preview/mp4/sample-10s.mp4" type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-overlay"><span>🌌 Northern Lights &amp; Arctic Life</span></div>
+        </div>
+        <div class="video-container">
+          <video controls style="width:100%;height:100%;object-fit:cover;">
+            <source src="https://samplelib.com/lib/preview/mp4/sample-15s.mp4" type="video/mp4"/>
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-overlay"><span>🐠 Great Barrier Reef Dive</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ PAGE 2: ABOUT ═══ -->
+<div id="page-about" class="page">
+
+  <section style="background: var(--green-dark); padding: 80px 40px 60px;">
+    <div class="max-w two-col">
+      <div>
+        <div class="section-label">Our Story</div>
+        <h1 class="section-title" style="color: var(--cream); font-size: clamp(2rem,5vw,3.5rem);">Built by Nature Lovers, for Nature Lovers</h1>
+        <p class="formatted-p" style="color: rgba(245,240,232,0.75);">Founded in 2010 by a group of passionate ecologists and documentary filmmakers, NatureVerse began as a simple blog cataloguing field notes from the Kenyan savannah. What started as a personal project quickly grew into one of the world's most visited nature education platforms.</p>
+        <p class="formatted-p mb-0" style="color: rgba(245,240,232,0.75);">Our editorial team of 80 field researchers, scientists, photographers, and writers spans every continent. We believe that education is the most powerful conservation tool available.</p>
+      </div>
+      <div class="img-placeholder" style="background: linear-gradient(135deg, #2d5a3d, #4a8c5c); min-height: 380px;">
+        🌍<span>Our Team in the Field</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="bg-pattern">
+    <div class="max-w">
+      <div class="section-label">Milestones</div>
+      <h2 class="section-title">Our Journey</h2>
+      <p class="section-sub">From a blog to a global conservation media platform.</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2010</div>
+          <div class="timeline-title">NatureVerse Founded</div>
+          <p class="timeline-text">Dr. Amara Osei and filmmaker Priya Nair launch a blog from Nairobi with the first feature on Maasai Mara lion prides.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2013</div>
+          <div class="timeline-title">First Documentary Series</div>
+          <p class="timeline-text">Our 6-part series "Africa Unfiltered" premieres on three international streaming platforms and wins two environmental journalism awards.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2017</div>
+          <div class="timeline-title">10M Readers Milestone</div>
+          <p class="timeline-text">NatureVerse reaches 10 million monthly readers, establishing partnerships with UNESCO and WWF.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2021</div>
+          <div class="timeline-title">Conservation Fund Launched</div>
+          <p class="timeline-text">We establish the NatureVerse Conservation Fund, committing $2M annually to habitat protection across 15 countries.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-year">2024</div>
+          <div class="timeline-title">AI-Powered Species ID Tool</div>
+          <p class="timeline-text">We launch SpeciesLens, a free mobile tool that identifies plants and animals from photos and links users to conservation data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY PARAGRAPHS -->
+  <section>
+    <div class="max-w">
+      <div class="section-label">Our Philosophy</div>
+      <h2 class="section-title">Why Nature Matters</h2>
+      <p class="formatted-p">The relationship between humanity and the natural world is one of deep interdependence, shaped over millions of years of shared evolution. Every breath we take is made possible by the photosynthesis occurring in forests and ocean phytoplankton.</p>
+      <p class="formatted-p">Biodiversity is not merely a scientific curiosity. It is the foundation upon which all human civilization rests. The medicines that save lives, the fibers that clothe us, the clean water that sustains us: all originate from the diversity of species and ecosystems that cover our planet.</p>
+      <div class="pull-quote">
+        <p>"In every walk with nature, one receives far more than he seeks. The mountains are calling, and the rivers are whispering secrets older than civilization."</p>
+      </div>
+      <p class="formatted-p">Climate change, habitat destruction, overexploitation, pollution, and invasive species represent the five greatest threats to Earth's biodiversity today. But these threats are human-caused — and crucially, human-solvable.</p>
+    </div>
+  </section>
+
+  <!-- TEAM CARDS -->
+  <section class="bg-pattern">
+    <div class="max-w">
+      <div class="section-label text-center">The People Behind the Stories</div>
+      <h2 class="section-title text-center">Meet Our Team</h2>
+      <div class="three-col mt-48">
+        <div class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #2d5a3d, #4a8c5c);">👩‍🔬</div>
+          <div class="card-body">
+            <span class="card-tag">Co-Founder &amp; Editor</span>
+            <div class="card-title">Dr. Amara Osei</div>
+            <p class="card-text">PhD in Ecology from the University of Nairobi. 20 years in field research across East Africa's savannah ecosystems.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #1a3060, #2d5a9a);">🎥</div>
+          <div class="card-body">
+            <span class="card-tag">Co-Founder &amp; Director</span>
+            <div class="card-title">Priya Nair</div>
+            <p class="card-text">Award-winning documentary filmmaker. Her work has been featured on BBC, National Geographic, and Netflix Nature series.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background: linear-gradient(135deg, #5c2a1a, #8a4a2d);">🌊</div>
+          <div class="card-body">
+            <span class="card-tag">Marine Correspondent</span>
+            <div class="card-title">James Kamau</div>
+            <p class="card-text">Marine biologist and underwater photographer. James has logged over 4,000 dive hours across five ocean basins.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ PAGE 3: GALLERY ═══ -->
+<div id="page-gallery" class="page">
+
+  <section>
+    <div class="max-w">
+      <div class="section-label text-center">Visual Stories</div>
+      <h2 class="section-title text-center">Photo Gallery</h2>
+      <p class="section-sub text-center" style="margin: 0 auto 16px;">Images captured by our field photographers across seven continents.</p>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search photos: forest, ocean, wildlife…" id="searchInput"/>
+        <button onclick="handleSearch()">Search</button>
+      </div>
+
+      <!-- 6 IMAGE CONTAINERS -->
+      <div class="gallery-grid">
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #1a5c2a, #2d8a4a);">🌳<span>Borneo Canopy</span></div>
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #1a3060, #3060a0); aspect-ratio:4/3;">🐋<span>Blue Whale, Pacific</span></div>
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #5c3a00, #9a6a10); aspect-ratio:4/3;">🦁<span>Maasai Mara Lions</span></div>
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #0a3040, #1a6070); aspect-ratio:4/3;">🐧<span>Emperor Penguins, Antarctica</span></div>
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #40100a, #7a2010); aspect-ratio:4/3;">🌋<span>Kilauea Volcano, Hawaii</span></div>
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #2a0a40, #6030a0); aspect-ratio:4/3;">🌌<span>Aurora Borealis, Iceland</span></div>
+      </div>
+
+      <!-- 2 MORE IMAGES -->
+      <div class="two-col mt-48" style="gap:24px;">
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #0a4030, #1a7050); aspect-ratio:16/9;">🌺<span>Amazon Orchids</span></div>
+        <div class="img-placeholder" style="background: linear-gradient(135deg, #3a2a00, #7a5a00); aspect-ratio:16/9;">🦒<span>Giraffes at Sunset</span></div>
+      </div>
+
+      <!-- TABLE 1 -->
+      <h3 class="section-title" style="margin: 60px 0 8px; font-size: 1.6rem;">Photo Archive Details</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Photo Title</th><th>Location</th><th>Photographer</th><th>Date</th><th>Category</th><th>License</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Borneo Canopy at Dawn</td><td>Sarawak, Malaysia</td><td>Lin Wei</td><td>Mar 2024</td><td><span class="badge badge-green">Forest</span></td><td>CC BY 4.0</td></tr>
+            <tr><td>Blue Whale Migration</td><td>Pacific Ocean</td><td>James Kamau</td><td>Jan 2024</td><td><span class="badge badge-gold">Marine</span></td><td>Editorial</td></tr>
+            <tr><td>Maasai Mara Lions</td><td>Kenya</td><td>Amara Osei</td><td>Aug 2023</td><td><span class="badge badge-red">Wildlife</span></td><td>All Rights</td></tr>
+            <tr><td>Emperor Penguin Colony</td><td>Antarctica</td><td>Sofia Brandt</td><td>Nov 2023</td><td><span class="badge badge-gold">Polar</span></td><td>CC BY 4.0</td></tr>
+            <tr><td>Kilauea Eruption Flow</td><td>Hawaii, USA</td><td>Kai Nakamura</td><td>May 2023</td><td><span class="badge badge-red">Geology</span></td><td>CC BY-SA</td></tr>
+            <tr><td>Aurora Borealis, Reykjavik</td><td>Iceland</td><td>Björn Sigurðsson</td><td>Dec 2023</td><td><span class="badge badge-green">Atmosphere</span></td><td>Editorial</td></tr>
+            <tr><td>Amazon Orchid Varieties</td><td>Manaus, Brazil</td><td>Lucia Ferreira</td><td>Jul 2023</td><td><span class="badge badge-green">Flora</span></td><td>CC BY 4.0</td></tr>
+            <tr><td>Giraffes at Sunset</td><td>Amboseli, Kenya</td><td>Amara Osei</td><td>Sep 2023</td><td><span class="badge badge-red">Wildlife</span></td><td>All Rights</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ PAGE 4: EXPLORE ═══ -->
+<div id="page-explore" class="page">
+
+  <section style="background: var(--green-mid); padding: 60px 40px;">
+    <div class="max-w text-center">
+      <div class="section-label" style="color: var(--gold);">Discover</div>
+      <h1 class="section-title" style="color: var(--cream); font-size: clamp(2rem,5vw,3.5rem);">Explore Our World</h1>
+      <p class="section-sub" style="color: rgba(245,240,232,0.75); margin: 0 auto;">Dive into ecosystems, species data, and field reports from our researchers worldwide.</p>
+    </div>
+  </section>
+
+  <!-- TWO COL: NESTED LIST + CARDS -->
+  <section class="bg-pattern">
+    <div class="max-w two-col">
+      <div>
+        <div class="section-label">Ecosystem Guide</div>
+        <h2 class="section-title">Earth's Major Biomes</h2>
+        <p class="section-sub">Every biome is a unique community of life shaped by climate, geography, and millennia of evolution.</p>
+        <!-- NESTED LIST -->
+        <ul class="styled-list">
+          <li>Tropical Rainforests
+            <ul>
+              <li>Amazon Basin — South America</li>
+              <li>Congo Basin — Central Africa</li>
+              <li>Borneo &amp; Sumatra — Southeast Asia</li>
+              <li>Daintree — Queensland, Australia</li>
+            </ul>
+          </li>
+          <li>Temperate Forests
+            <ul>
+              <li>Pacific Northwest — USA &amp; Canada</li>
+              <li>Black Forest — Germany</li>
+              <li>Valdivian Forest — Chile</li>
+            </ul>
+          </li>
+          <li>Grasslands &amp; Savannahs
+            <ul>
+              <li>Maasai Mara — Kenya &amp; Tanzania</li>
+              <li>Serengeti — Tanzania</li>
+              <li>Pampas — Argentina</li>
+            </ul>
+          </li>
+          <li>Marine Ecosystems
+            <ul>
+              <li>Great Barrier Reef — Australia</li>
+              <li>Coral Triangle — Pacific</li>
+              <li>Kelp Forests — California</li>
+            </ul>
+          </li>
+          <li>Polar &amp; Alpine Zones
+            <ul>
+              <li>Antarctic Ice Sheet</li>
+              <li>Arctic Tundra — Canada &amp; Russia</li>
+              <li>Himalayan Alpine Meadows</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="section-label">Field Reports</div>
+        <h2 class="section-title">Latest from the Field</h2>
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-body">
+            <span class="card-tag">🌿 Forest</span>
+            <div class="card-title">New Orchid Species Found in Madagascar</div>
+            <p class="card-text">Researchers catalogued 14 previously undescribed orchid species in a remote highland valley.</p>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom: 20px;">
+          <div class="card-body">
+            <span class="card-tag">🌊 Ocean</span>
+            <div class="card-title">Coral Bleaching Alert: Great Barrier Reef</div>
+            <p class="card-text">Aerial surveys confirm a fourth mass bleaching event since 2016, affecting 73% of the reef's 2,300 km length.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <span class="card-tag">🦁 Wildlife</span>
+            <div class="card-title">Cheetah Population Rebounds in Kenya</div>
+            <p class="card-text">A 15-year conservation program has increased cheetah numbers in the Laikipia Plateau from 54 to 189 individuals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABLE 2: SPECIES DATABASE -->
+  <section>
+    <div class="max-w">
+      <div class="section-label">Conservation Status</div>
+      <h2 class="section-title">At-Risk Species Database</h2>
+      <p class="section-sub">Flagship species currently monitored by our conservation partners.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Species</th><th>Scientific Name</th><th>Region</th><th>Wild Population</th><th>IUCN Status</th><th>Trend</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>🦁 African Lion</td><td>Panthera leo</td><td>Sub-Saharan Africa</td><td>~23,000</td><td><span class="badge badge-gold">Vulnerable</span></td><td>📉 Decreasing</td></tr>
+            <tr><td>🐘 African Elephant</td><td>Loxodonta africana</td><td>Africa</td><td>~415,000</td><td><span class="badge badge-gold">Vulnerable</span></td><td>📉 Decreasing</td></tr>
+            <tr><td>🦏 White Rhinoceros</td><td>Ceratotherium simum</td><td>Southern Africa</td><td>~18,000</td><td><span class="badge badge-green">Near Threatened</span></td><td>📈 Increasing</td></tr>
+            <tr><td>🐅 Amur Leopard</td><td>Panthera pardus orientalis</td><td>Russian Far East</td><td>~100</td><td><span class="badge badge-red">Critically Endangered</span></td><td>📈 Increasing</td></tr>
+            <tr><td>🦧 Bornean Orangutan</td><td>Pongo pygmaeus</td><td>Borneo</td><td>~104,700</td><td><span class="badge badge-red">Critically Endangered</span></td><td>📉 Decreasing</td></tr>
+            <tr><td>🐋 Blue Whale</td><td>Balaenoptera musculus</td><td>Global Oceans</td><td>10,000–25,000</td><td><span class="badge badge-gold">Endangered</span></td><td>📈 Increasing</td></tr>
+            <tr><td>🐧 Emperor Penguin</td><td>Aptenodytes forsteri</td><td>Antarctica</td><td>~600,000</td><td><span class="badge badge-gold">Vulnerable</span></td><td>📉 Decreasing</td></tr>
+            <tr><td>🐢 Leatherback Turtle</td><td>Dermochelys coriacea</td><td>Global</td><td>~34,000</td><td><span class="badge badge-gold">Vulnerable</span></td><td>📉 Decreasing</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCORDION FAQ -->
+  <section class="bg-pattern">
+    <div class="max-w two-col">
+      <div>
+        <div class="section-label">Common Questions</div>
+        <h2 class="section-title">Nature FAQ</h2>
+        <p class="section-sub">Answers to the most frequently asked questions from our global community.</p>
+        <p class="formatted-p">The natural world is full of mystery and complexity that continues to surprise even the most experienced scientists. Every year brings new discoveries that challenge our understanding of life on Earth.</p>
+      </div>
+      <div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            What is the most biodiverse place on Earth? <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>The tropical Andes — spanning Colombia, Ecuador, Peru, Bolivia, and Venezuela — hosting over 45,000 plant species per square kilometre.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            How many species go extinct each day? <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Scientists estimate 150–200 species go extinct every 24 hours — a rate 1,000 to 10,000 times higher than the natural background rate.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            What can individuals do to protect nature? <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Reduce meat consumption, support sustainable products, reduce single-use plastics, plant native species, and vote for environmentally conscious policies.</p>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-header" onclick="toggleAccordion(this)">
+            Why do forests matter for climate? <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <p>Forests store roughly 45% of terrestrial carbon and absorb about 2.6 billion tonnes of CO₂ annually, regulating rainfall and cooling temperatures across continents.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ PAGE 5: CONTACT ═══ -->
+<div id="page-contact" class="page">
+
+  <section style="background: var(--green-dark); padding: 60px 40px;">
+    <div class="max-w text-center">
+      <div class="section-label">Get In Touch</div>
+      <h1 class="section-title" style="color: var(--cream); font-size: clamp(2rem,5vw,3.5rem);">We'd Love to Hear From You</h1>
+      <p class="section-sub" style="color: rgba(245,240,232,0.7); margin: 0 auto;">Whether you're a researcher, educator, journalist, or nature enthusiast — our door is always open.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="max-w two-col">
+      <div>
+        <div class="section-label">Send a Message</div>
+        <h2 class="section-title">Contact Form</h2>
+        <div class="contact-form">
+          <div class="form-group">
+            <label for="fname">Full Name</label>
+            <input type="text" id="fname" placeholder="Your full name"/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@example.com"/>
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject">
+              <option value="">Select a topic…</option>
+              <option>Editorial Inquiry</option>
+              <option>Partnership &amp; Sponsorship</option>
+              <option>Conservation Project</option>
+              <option>Photo &amp; Video Licensing</option>
+              <option>General Inquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="msg">Message</label>
+            <textarea id="msg" placeholder="Tell us what's on your mind…"></textarea>
+          </div>
+          <button class="btn" onclick="handleContactSubmit()">Send Message</button>
+        </div>
+      </div>
+      <div>
+        <div class="section-label">Find Us</div>
+        <h2 class="section-title">Our Offices</h2>
+        <p class="formatted-p">NatureVerse operates from three regional offices strategically located to cover the world's most critical biodiversity hotspots. Each office houses researchers, editors, and multimedia producers.</p>
+        <p class="formatted-p">We welcome visits, collaborations, and partnerships with schools, universities, government bodies, and NGOs committed to environmental education.</p>
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 24px;">
+          <div class="card" style="border-left: 4px solid var(--gold); border-radius: 4px 12px 12px 4px;">
+            <div class="card-body">
+              <span class="card-tag">🌍 Africa HQ</span>
+              <div class="card-title">Nairobi, Kenya</div>
+              <p class="card-text">Westlands Business Park, Nairobi<br>+254 20 444 8800 · africa@natureverse.org</p>
+            </div>
+          </div>
+          <div class="card" style="border-left: 4px solid var(--green-light); border-radius: 4px 12px 12px 4px;">
+            <div class="card-body">
+              <span class="card-tag">🌏 Asia Pacific</span>
+              <div class="card-title">Singapore</div>
+              <p class="card-text">One Raffles Quay, Singapore 048583<br>+65 6800 9200 · asia@natureverse.org</p>
+            </div>
+          </div>
+          <div class="card" style="border-left: 4px solid var(--gold); border-radius: 4px 12px 12px 4px;">
+            <div class="card-body">
+              <span class="card-tag">🌎 Americas</span>
+              <div class="card-title">Bogotá, Colombia</div>
+              <p class="card-text">Carrera 7 No. 71-21, Bogotá<br>+57 1 800 7700 · americas@natureverse.org</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="bg-gradient text-center">
+    <div class="max-w" style="max-width: 700px;">
+      <div class="section-label" style="color: var(--gold);">Stay Connected</div>
+      <h2 class="section-title" style="color: var(--cream);">Join 2 Million Nature Lovers</h2>
+      <p style="color: rgba(245,240,232,0.7); margin-bottom: 36px; font-size: 1.05rem; line-height: 1.7;">Get weekly field reports, conservation alerts, and stunning photography delivered straight to your inbox. No spam — ever.</p>
+      <div class="search-bar" style="max-width: 440px; margin-bottom: 0;">
+        <input type="email" placeholder="Enter your email address" id="newsletterEmail"/>
+        <button onclick="handleNewsletter()">Subscribe</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">🌿 NatureVerse</div>
+      <p>Telling nature's stories with honesty, wonder, and urgency. Our mission is to connect humanity with the natural world through award-winning journalism and conservation science.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('home', null)">Home</a></li>
+        <li><a href="#" onclick="showPage('about', null)">About Us</a></li>
+        <li><a href="#" onclick="showPage('gallery', null)">Gallery</a></li>
+        <li><a href="#" onclick="showPage('explore', null)">Ecosystems</a></li>
+        <li><a href="#" onclick="showPage('contact', null)">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Topics</h4>
+      <ul>
+        <li><a href="#">Marine Life</a></li>
+        <li><a href="#">Forests</a></li>
+        <li><a href="#">Wildlife</a></li>
+        <li><a href="#">Climate</a></li>
+        <li><a href="#">Conservation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#">Field Reports</a></li>
+        <li><a href="#">Species Database</a></li>
+        <li><a href="#">Research Papers</a></li>
+        <li><a href="#">Photo Archive</a></li>
+        <li><a href="#">Press Kit</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 NatureVerse. All rights reserved. | Privacy Policy | Terms of Use</p>
+    <div class="social-links">
+      <a href="#">𝕏</a>
+      <a href="#">in</a>
+      <a href="#">▶</a>
+      <a href="#">📷</a>
+    </div>
+  </div>
+</footer>
+
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="toast" id="toast"></div>
+
+<script>
+  function showPage(pageId, clickedLink) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + pageId).classList.add('active');
+    if (clickedLink) clickedLink.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleAccordion(btn) {
+    const item = btn.parentElement;
+    const body = item.querySelector('.accordion-body');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.accordion-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.accordion-body').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  function handleContactSubmit() {
+    const name = document.getElementById('fname').value.trim();
+    const email = document.getElementById('email').value.trim();
+    if (!name || !email) { showToast('⚠️ Please fill in your name and email.'); return; }
+    showToast('✅ Message sent! We\'ll reply within 48 hours.');
+    document.getElementById('fname').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('msg').value = '';
+  }
+
+  function handleNewsletter() {
+    const e = document.getElementById('newsletterEmail').value.trim();
+    if (!e || !e.includes('@')) { showToast('⚠️ Please enter a valid email address.'); return; }
+    showToast('🌿 Welcome aboard! Check your inbox for a confirmation email.');
+    document.getElementById('newsletterEmail').value = '';
+  }
+
+  function handleSearch() {
+    const q = document.getElementById('searchInput').value.trim();
+    if (q) showToast(`🔍 Searching for "${q}"…`);
+  }
+
+  window.addEventListener('scroll', () => {
+    const btn = document.getElementById('backToTop');
+    btn.classList.toggle('visible', window.scrollY > 400);
+  });
+</script>
+
+</body>
+</html>
 
 
 
